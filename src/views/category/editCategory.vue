@@ -4,8 +4,8 @@
       <el-form-item label="类别名:">
         <el-input v-model="formDatas.title" class="nameInput" clearable></el-input>
       </el-form-item>
-      <el-form-item label="类别图片:">
-        <img :src="formDatas.icon">
+      <el-form-item label="类别图标:">
+        <uploadImg v-model="formDatas.icon"></uploadImg>
       </el-form-item>
       <el-form-item label="类别排序:">
         <el-input-number v-model="formDatas.index" :min="1" :max="50" label="数字越大越靠前"></el-input-number>
@@ -22,8 +22,13 @@
 </template>
 
 <script>
+  import uploadImg from '@/components/uploadImg'
+
     export default {
       name: "editCategory",
+      components: {
+        uploadImg
+      },
       data(){
         return{
           formDatas: {

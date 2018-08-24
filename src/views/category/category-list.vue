@@ -9,7 +9,7 @@
           <img :src="scope.row.icon" class="category-icon">
         </template>
       </el-table-column>
-      <el-table-column label="类别" prop="title">
+      <el-table-column label="类别名" prop="title">
       </el-table-column>
       <el-table-column label="分类排序" prop="index">
       </el-table-column>
