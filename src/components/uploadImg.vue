@@ -27,7 +27,7 @@
         uploadSuccess(file){
           this.$emit('input', file.url)
         },
-        getToken(){
+        getToken(){    // 获取上传凭证
           this.$axios.get('http://upload.yaojunrong.com/getToken').then(res => {
             // console.log(res.data);
             this.uploadData.token = res.data

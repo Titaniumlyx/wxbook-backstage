@@ -5,10 +5,11 @@
         <el-input v-model="formDatas.title" class="nameInput" clearable></el-input>
       </el-form-item>
       <el-form-item label="类别图标:">
-        <uploadImg v-model="formDatas.icon"></uploadImg>
+        <uploadImg v-model="formDatas.icon" style="float: left"></uploadImg>
+        <span style="float: left" class="remark">点击图标进行修改</span>
       </el-form-item>
-      <el-form-item label="类别排序:">
-        <el-input-number v-model="formDatas.index" :min="1" :max="50" label="数字越大越靠前"></el-input-number>
+      <el-form-item label="类别排序: (数字越大越靠前)">
+        <el-input-number v-model="formDatas.index" :min="1" :max="50"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button
@@ -74,6 +75,12 @@
     padding: 20px;
     .nameInput{
       width: 500px;
+    }
+    .remark{
+      display: block;
+      margin-left: 30px;
+      margin-top: 15px;
+      color: #aaa;
     }
   }
 </style>

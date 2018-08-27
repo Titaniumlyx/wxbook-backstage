@@ -32,7 +32,7 @@ const router = new Router({
         },
         {
           path: 'userList',
-          component: () => import('../views/userList'),
+          component: () => import('../views/user/userList'),
           meta: {
             title: '用户列表'
           }
@@ -57,6 +57,15 @@ const router = new Router({
           component: () => import('../views/category/editCategory'),
           meta: {
             title: '修改编辑分类'
+          }
+        },
+        {
+          path: 'personCenter',
+          component: () => import('../views/user/personCenter'),
+          meta: {
+            title: {
+              title: '个人中心'
+            }
           }
         }
       ]

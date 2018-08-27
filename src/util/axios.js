@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from '../router'
+import Vue from 'vue'
 
 const baseURL = '/api/admin'
 
@@ -15,6 +16,7 @@ const fetch = {
         resolve(res.data)
       }).catch(err => {
         reject(err)
+        Vue.prototype.$message.error('请求超时，请检查你的网络')
       })
     })
   },
@@ -28,6 +30,7 @@ const fetch = {
         resolve(res.data)
       }).catch(err => {
         reject(err)
+        Vue.prototype.$message.error('请求超时，请检查你的网络')
       })
     })
   },

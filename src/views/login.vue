@@ -14,7 +14,7 @@
           <el-form-item>
             <el-button
               type="primary"
-              @click="login"
+              @click="loginIn"
               :loading="isLoading"
               class="btnItem"
             >登录</el-button>
@@ -26,28 +26,63 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     data() {
       return {
         ruleForm: {
-          username: 'LC',
-          password: '123321'
+          username: 'admin',
+          password: 'admin'
         },
         isLoading: false
       };
     },
     methods: {
-      async login(){
+      // 一、 不使用 store(mapActions)
+      // async loginIn(){
+      //   this.isLoading = true
+      //   const data = await this.$axios.post('/login', this.ruleForm)
+      //   this.isLoading = false
+      //   // console.log(data);
+      //   if(data.code === 200){
+      //     this.$router.push('/layout/index')
+      //   }else{
+      //     this.$message.error(data.msg);
+      //   }
+      // }
+      // 二、  使用 store , 不使用 mapActions
+      loginIn(){
         this.isLoading = true
-        const data = await this.$axios.post('/login', this.ruleForm)
-        this.isLoading = false
-        // console.log(data);
-        if(data.code === 200){
-          this.$router.push('/layout/index')
-        }else{
-          this.$message.error(data.msg);
-        }
-      }
+        // this.$store.dispatch('login', this.ruleForm).then((isLogin) => {
+        //   this.isLoading = false
+        //   // console.log(isLogin);
+        //   if(isLogin){
+        //     this.$router.push('/layout/index')
+        //   }
+        // })
+        // 三、  使用 mapActions
+        // this.login(this.ruleForm).then((isLogin) => {
+        //   this.isLoading = false
+        //   if(isLogin){
+        //     this.$router.push('/layout/index')
+        //   }
+        // })
+        // 四、 不使用 actions
+          this.isLoading = true
+          this.$axios.post('/login', this.ruleForm).then((data) => {
+            this.isLoading = false
+            // console.log(data);
+            if(data.code === 200){
+              this.$message.success(data.msg);
+              this.$store.commit('SET_USERINFO', data.data)
+              this.$router.push('/layout/index')
+            }else{
+              this.$message.error(data.msg);
+            }
+          })
+      },
+      ...mapActions(['login'])
     }
   }
 </script>

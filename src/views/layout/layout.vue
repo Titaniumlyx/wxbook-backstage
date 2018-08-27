@@ -38,8 +38,17 @@
         </el-menu>
       </div>
       <div class="main-content">
-        <div class="title">
-          <h2>后台操作系统</h2>
+        <div class="conTop">
+          <h2 class="title fll">云书后台操作系统</h2>
+          <el-dropdown class="user-avatar flr">
+            <div>
+              <img :src="userInfo.avatar" v-if="userInfo.avatar">
+            </div>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="handlePerson">个人信息</el-dropdown-item>
+              <el-dropdown-item @click.native="handleOut">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
         <div class="content">
           <router-view></router-view>
@@ -49,9 +58,36 @@
 </template>
 
 <script>
-    export default {
-        name: "layout"
+  import { mapState } from 'vuex'
+
+  export default {
+    name: "layout",
+    computed: {
+      ...mapState(['userInfo'])
+    },
+    methods: {
+      handlePerson(){
+        this.$router.push('/layout/personCenter')
+      },
+      handleOut(){
+        let payload = {
+          username: '',
+          nickname: '',
+          email: '',
+          desc: '',
+          avatar: ''
+        }
+        this.$axios.get('/logout').then(res => {
+          // console.log(res);
+          if(res.code === 200){
+            this.$message.success(res.msg)
+            this.$store.commit('SET_USERINFO', payload)
+            this.$router.push('/Login')
+          }
+        })
+      }
     }
+  }
 </script>
 
 <style scoped lang="scss">
@@ -67,11 +103,29 @@
   }
   .main-content{
     margin-left: 200px;
-    .title{
-      height: 80px;
-      line-height: 80px;
-      text-align: center;
+    .conTop{
+      height: 100px;
       border-bottom: 1px solid #545C64;
+    }
+    .title{
+      position: absolute;
+      left: 50%;
+      top: 30px;
+      transform: translateX(-50%);
+      /*height: 80px;*/
+      /*line-height: 80px;*/
+      /*text-align: center;*/
+    }
+    .user-avatar{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 50px;
+      height: 50px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 </style>
