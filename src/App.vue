@@ -21,4 +21,9 @@ export default {
   .flr{
     float: right;
   }
+  .clearfix{
+    content: '';
+    clear: both;
+    display: block;
+  }
 </style>
