@@ -26,6 +26,7 @@ const fetch = {
         // console.log(res);
         if(res.data.code === 401){
           router.push('/Login')
+          Vue.prototype.$message.error(res.data.msg)
         }
         resolve(res.data)
       }).catch(err => {

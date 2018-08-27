@@ -16,6 +16,9 @@
             <el-menu-item-group>
               <el-menu-item index="/layout/userList">用户列表</el-menu-item>
             </el-menu-item-group>
+            <el-menu-item-group>
+              <el-menu-item index="/layout/addUser">添加用户</el-menu-item>
+            </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -41,8 +44,11 @@
         <div class="conTop">
           <h2 class="title fll">云书后台操作系统</h2>
           <el-dropdown class="user-avatar flr">
-            <div>
+            <div class="selfAvatar">
               <img :src="userInfo.avatar" v-if="userInfo.avatar">
+            </div>
+            <div class="selfUsername">
+              <span class="word">{{userInfo.nickname}}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="handlePerson">个人信息</el-dropdown-item>
@@ -117,14 +123,25 @@
       /*text-align: center;*/
     }
     .user-avatar{
+      width: 100px;
+      height: 80px;
       position: absolute;
       top: 10px;
       right: 10px;
-      width: 50px;
-      height: 50px;
-      img{
-        width: 100%;
-        height: 100%;
+      .selfAvatar{
+        margin: 0 auto;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        border-radius: 50%;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .selfUsername{
+        text-align: center;
+        margin-top: 5px;
       }
     }
   }

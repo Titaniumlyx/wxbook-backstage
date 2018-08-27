@@ -67,6 +67,15 @@ const router = new Router({
               title: '个人中心'
             }
           }
+        },
+        {
+          path: 'addUser',
+          component: () => import('../views/user/addUser'),
+          meta: {
+            title: {
+              title: '添加用户'
+            }
+          }
         }
       ]
     }

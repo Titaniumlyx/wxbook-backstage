@@ -21,13 +21,13 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <!--<el-button-->
+              <!--size="mini"-->
+              <!--@click="handleEdit(scope.$index, scope.row)">编辑</el-button>-->
             <el-button
               size="mini"
               type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              @click="handleDelete(scope.row._id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -47,6 +47,16 @@
           const res = await this.$axios.get('/user')
           // console.log(res);
           this.tableData = res.data
+        },
+        handleDelete(id){
+          // console.log(id);
+          this.$axios.post('/user/delete', {userIds: [id]}).then(res => {
+            // console.log(res);
+            if(res.code === 200){
+              this.$message.success('成功删除用户')
+              this.getData()
+            }
+          })
         }
       },
       created(){

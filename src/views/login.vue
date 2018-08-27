@@ -32,8 +32,8 @@
     data() {
       return {
         ruleForm: {
-          username: 'admin',
-          password: 'admin'
+          username: '12121',
+          password: '12121'
         },
         isLoading: false
       };
@@ -80,6 +80,9 @@
             }else{
               this.$message.error(data.msg);
             }
+          }).catch(err => {
+            this.isLoading = false
+            this.$message.error('请求超时，请检查你的网络')
           })
       },
       ...mapActions(['login'])
