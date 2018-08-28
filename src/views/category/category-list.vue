@@ -13,7 +13,7 @@
       </el-table-column>
       <el-table-column label="分类排序" prop="index">
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="基本操作">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -22,6 +22,18 @@
             size="mini"
             type="danger"
             @click="handleDelete(scope.row._id)">删除</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column label="书本操作">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="primary"
+            @click="handleCheck(scope.row._id)">查看图书</el-button>
+          <el-button
+            size="mini"
+            type="primary"
+            @click="handleAddBook(scope.row._id)">添加图书</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -45,7 +57,31 @@
         handleEdit(id){
           this.$router.push({name: 'editCategory', query: {id}})
         },
-        handleDelete(id){}
+        handleDelete(id){
+          this.$confirm('此操作将永久删除该分类，请确认该分类下没有图书?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.$axios.delete(`/category/${id}`).then(res => {
+              console.log(res);
+              if(res.code === 200){
+                this.$message.success(res.msg)
+              }
+            })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            })
+          })
+        },
+        handleCheck(id){
+          this.$router.push({name: 'bookList', query: {id}})
+        },
+        handleAddBook(id){
+
+        }
       },
       created(){
         this.getData()

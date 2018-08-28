@@ -48,7 +48,7 @@
         if(this.isSelect){
           this.isSelectNum = index + 1;
           this.$emit('input', index + 1)
-          this.isCan = false
+          this.isSelect = false
         }
       }
     },

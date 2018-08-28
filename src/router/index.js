@@ -63,18 +63,22 @@ const router = new Router({
           path: 'personCenter',
           component: () => import('../views/user/personCenter'),
           meta: {
-            title: {
-              title: '个人中心'
-            }
+            title: '个人中心'
           }
         },
         {
           path: 'addUser',
           component: () => import('../views/user/addUser'),
           meta: {
-            title: {
-              title: '添加用户'
-            }
+            title: '添加用户'
+          }
+        },
+        {
+          path: "bookList",
+          name: 'bookList',
+          component: () => import('../views/books/bookList'),
+          meta: {
+            title: '分类图书'
           }
         }
       ]
