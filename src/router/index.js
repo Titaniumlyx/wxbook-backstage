@@ -74,11 +74,19 @@ const router = new Router({
           }
         },
         {
-          path: "bookList",
+          path: 'bookList',
           name: 'bookList',
           component: () => import('../views/books/bookList'),
           meta: {
             title: '分类图书'
+          }
+        },
+        {
+          path: 'addBook',
+          name: 'addBook',
+          component: () => import('../views/books/addBook'),
+          meta: {
+            title: '添加图书'
           }
         }
       ]

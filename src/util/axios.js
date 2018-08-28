@@ -6,7 +6,7 @@ const baseURL = '/api/admin'
 
 var xhr = axios.create({
   baseURL,
-  timeout: 5000
+  timeout: 15000
 });
 
 const fetch = {

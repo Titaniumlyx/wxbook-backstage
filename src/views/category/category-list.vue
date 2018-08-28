@@ -80,7 +80,7 @@
           this.$router.push({name: 'bookList', query: {id}})
         },
         handleAddBook(id){
-
+          this.$router.push({name: 'addBook', query: {id}})
         }
       },
       created(){

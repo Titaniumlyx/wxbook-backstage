@@ -6,7 +6,7 @@
     :show-file-list="false"
     :on-success="uploadSuccess">
     <img v-show="imageUrl" :src="imageUrl" class="cateIcon">
-    <el-button v-show="!imageUrl">上传头像</el-button>
+    <el-button v-show="!imageUrl">上传图片</el-button>
   </el-upload>
 </template>
 

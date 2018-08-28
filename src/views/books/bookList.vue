@@ -15,8 +15,16 @@
       </el-table-column>
       <el-table-column label="时间" prop="updateTime">
       </el-table-column>
-      <!--<el-table-column label="描述" prop="desc">-->
-      <!--</el-table-column>-->
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.row._id)">删除图书</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column label="描述" prop="desc">
+      </el-table-column>
     </el-table>
     <!--<el-pagination-->
       <!--@current-change="handleCurrentChange"-->
@@ -45,7 +53,30 @@
         const id = this.$route.query.id
         this.$axios.get(`/category/${id}/books`, this.params).then(res => {
           // console.log(res);
+          res.data.books.forEach(item => {
+            item.desc = item.desc.substring(0,35) + '...'
+          })
           this.allBook = res.data.books
+        })
+      },
+      handleDelete(id){
+        this.$confirm('此操作将永久删除该图书，是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          const caid = this.$route.query.id
+          this.$axios.delete(`/category/${caid}/book/${id}`).then(res => {
+            console.log(res);
+            if(res.code === 200){
+              this.$message.success(res.msg)
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
         })
       },
       // handleCurrentChange(val){
