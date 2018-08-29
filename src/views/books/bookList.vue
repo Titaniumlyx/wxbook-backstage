@@ -15,8 +15,14 @@
       </el-table-column>
       <el-table-column label="时间" prop="updateTime">
       </el-table-column>
+      <el-table-column label="排序" prop="index">
+      </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="primary"
+            @click="handleEdit(scope.row._id)">编辑</el-button>
           <el-button
             size="mini"
             type="danger"
@@ -58,6 +64,9 @@
           })
           this.allBook = res.data.books
         })
+      },
+      handleEdit(id){
+        this.$router.push({name: 'bookEdit', query: {id}})
       },
       handleDelete(id){
         this.$confirm('此操作将永久删除该图书，是否继续?', '提示', {

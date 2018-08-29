@@ -88,7 +88,40 @@ const router = new Router({
           meta: {
             title: '添加图书'
           }
+        },
+        {
+          path: 'swiperList',
+          name: 'swiperList',
+          component: () => import('../views/swipers/swiperList'),
+          meta: {
+            title: '轮播图列表'
+          }
+        },
+        {
+          path: 'addSwiper',
+          name: 'addSwiper',
+          component: () => import('../views/swipers/addSwiper'),
+          meta: {
+            title: '添加轮播图'
+          }
+        },
+        {
+          path: 'editSwiper',
+          name: 'editSwiper',
+          component: () => import('../views/swipers/editSwiper'),
+          meta: {
+            title: '编辑轮播图'
+          }
+        },
+        {
+          path: 'bookEdit',
+          name: 'bookEdit',
+          component: () => import('../views/books/bookEdit'),
+          meta: {
+            title: '图书编辑'
+          }
         }
+
       ]
     }
   ]

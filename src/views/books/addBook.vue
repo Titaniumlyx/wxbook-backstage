@@ -1,15 +1,24 @@
 <template>
   <div class="container">
-    <el-form label-position="top" label-width="80px">
+    <el-form :model="formDatas" label-position="top">
       <el-form-item label="图书链接:">
-        <el-input v-model="url" class="nameInput" clearable></el-input>
+        <el-input v-model="formDatas.url" class="nameInput" clearable></el-input>
       </el-form-item>
       <el-form-item label="作者:">
-        <el-input v-model="author" class="nameInput" clearable></el-input>
+        <el-input v-model="formDatas.author" class="nameInput" clearable></el-input>
       </el-form-item>
       <el-form-item label="图书封面:">
-        <uploadImg v-model="img" style="float: left"></uploadImg>
-        <span style="float: left" class="remark">点击上传</span>
+        <div style="clear: both; display: block">
+          <el-switch
+            v-model="showWhich"
+            active-text="填写链接"
+            inactive-text="手动上传"
+            active-color="#13ce66"
+            inactive-color="#ff4949">
+          </el-switch>
+        </div>
+        <uploadImg v-model="formDatas.img" v-show="!showWhich" style="float: left"></uploadImg>
+        <el-input v-model="formDatas.img" v-show="showWhich" class="nameInput" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button
@@ -32,9 +41,12 @@
     },
     data(){
       return{
-        url: '',
-        author: '',
-        img: ''
+        formDatas: {
+          url: '',
+          author: '',
+          img: ''
+        },
+        showWhich: true
       }
     },
     methods: {
@@ -43,9 +55,7 @@
         // console.log(id);
         let params = {
           typeId: id,
-          url: this.url,
-          author: this.author,
-          img: this.img
+          ...this.formDatas
         }
         this.$axios.post('/book', params).then(res => {
           console.log(res);

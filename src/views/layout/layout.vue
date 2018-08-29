@@ -30,10 +30,16 @@
               <el-menu-item index="/layout/addCategory">添加分类</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-document"></i>
+              <span>轮播图管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/layout/swiperList">轮播图列表</el-menu-item>
+              <el-menu-item index="/layout/addSwiper">添加轮播图</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
           <el-menu-item index="4">
             <i class="el-icon-setting"></i>
             <span slot="title">导航四</span>
